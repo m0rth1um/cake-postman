@@ -9,7 +9,7 @@
     <?= $this->Html->link('Download', [
         'plugin' => 'CakePostman',
         'controller' => 'Collections',
-        'action' => 'downloadFileWithName',
+        'action' => 'downloadCollectionWithName',
         $file->name
     ], [
         'class' => 'btn btn-primary pull-right'

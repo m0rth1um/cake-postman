@@ -4,13 +4,14 @@ namespace CakePostman\Controller;
 use Cake\Event\Event;
 use CakePostman\Controller\AppController;
 use CakePostman\Lib\CollectionsFolder;
+use CakePostman\Lib\EnvironmentFolder;
 
 /**
- * Collections Controller
+ * Postman Controller
  *
  * @property \CakePostman\Model\Table\CollectionsTable $Collections
  */
-class CollectionsController extends AppController
+class PostmanController extends AppController
 {
 
 /**
@@ -20,8 +21,10 @@ class CollectionsController extends AppController
  */
     public function initialize()
     {
-        $this->collectionFolder = new CollectionsFolder;
         parent::initialize();
+
+        $this->collectionFolder = new CollectionsFolder;
+        $this->environmentFolder = new EnvironmentFolder;
     }
 
 /**
@@ -46,6 +49,9 @@ class CollectionsController extends AppController
         $projectName = $this->collectionFolder->projectName;
         $collections = $this->collectionFolder->getValidCollections();
         $this->set(compact('projectName', 'collections'));
+
+        $environments = $this->environmentFolder->getEnvironments();
+        $this->set(compact('environments'));
     }
 
 /**
@@ -54,9 +60,23 @@ class CollectionsController extends AppController
  * @param  string $fileName filename for clicked file
  * @return Response           response with downloadable file
  */
-    public function downloadFileWithName($fileName = null)
+    public function downloadCollectionWithName($fileName = null)
     {
         $file = $this->collectionFolder->getCollectionWithName($fileName);
+        $this->response->file($file->path);
+
+        return $this->response;
+    }
+
+/**
+ * download environment file
+ *
+ * @param  string $fileName filename for clicked file
+ * @return Response           response with downloadable file
+ */
+    public function downloadEnvironmentWithName($fileName = null)
+    {
+        $file = $this->environmentFolder->getEnvironmentWithName($fileName);
         $this->response->file($file->path);
 
         return $this->response;

@@ -26,7 +26,7 @@ class CollectionFile extends File
  *
  * @param string $fileName to initialize Collection file
  */
-    function __construct($fileName)
+    public function __construct($fileName)
     {
         parent::__construct(Configure::read('CakePostman.collections.path') . $fileName);
 

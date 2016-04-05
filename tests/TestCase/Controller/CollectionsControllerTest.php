@@ -1,13 +1,13 @@
 <?php
 namespace CakePostman\Test\TestCase\Controller;
 
-use CakePostman\Controller\CollectionsController;
+use CakePostman\Controller\PostmanController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * CakePostman\Controller\CollectionsController Test Case
+ * CakePostman\Controller\PostmanController Test Case
  */
-class CollectionsControllerTest extends IntegrationTestCase
+class PostmanControllerTest extends IntegrationTestCase
 {
 
     /**
