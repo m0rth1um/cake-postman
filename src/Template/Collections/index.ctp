@@ -28,26 +28,27 @@
                                         <?= $collection->created ?>
                                     </td>
                                     <td>
+                                        <div class="pull-right">
+                                            <?= $this->Html->link('View', [
+                                                'plugin' => 'CakePostman',
+                                                'controller' => 'Collections',
+                                                'action' => 'view',
+                                                $collection->name
+                                            ], [
+                                                'class' => 'btn btn-primary'
+                                            ]) ?>
 
-                                        <?= $this->Html->link('View', [
-                                            'plugin' => 'CakePostman',
-                                            'controller' => 'Collections',
-                                            'action' => 'view',
-                                            $collection->name
-                                        ], [
-                                            'class' => 'btn btn-primary'
-                                        ]) ?>
+                                            &nbsp;
 
-                                        &nbsp;
-
-                                        <?= $this->Html->link('Download', [
-                                            'plugin' => 'CakePostman',
-                                            'controller' => 'Collections',
-                                            'action' => 'downloadFileWithName',
-                                            $collection->name
-                                        ], [
-                                            'class' => 'btn btn-primary'
-                                        ]) ?>
+                                            <?= $this->Html->link('Download', [
+                                                'plugin' => 'CakePostman',
+                                                'controller' => 'Collections',
+                                                'action' => 'downloadFileWithName',
+                                                $collection->name
+                                            ], [
+                                                'class' => 'btn btn-primary'
+                                            ]) ?>
+                                        </div>
                                     </td>
 
                                 </tr>
