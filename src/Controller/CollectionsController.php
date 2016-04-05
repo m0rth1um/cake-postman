@@ -33,10 +33,10 @@ class CollectionsController extends AppController
     {
         $invalidCollections = $this->collectionFolder->getInvalidCollections();
         if (!empty($invalidCollections)) {
-            $error = '<h3>Collections entsprechen nicht dem Naming Standard</h3><br>';
+            $error = '<b>Collections entsprechen nicht dem Naming Standard:</b><br><br>';
             $error .= '<ul>';
             foreach ($invalidCollections as $file) {
-                $error .= '<li>' . $file->path . '</li><br>';
+                $error .= '<li><b>' . $file->name . '</li></b><br>' . '<i>(' . $file->path . ')</i>';
             }
             $error .= '</ul>';
             $error .= '<br><i>Beispiel: ' . $this->collectionFolder->projectName . '-V1_B23.postman_collection</i>';
