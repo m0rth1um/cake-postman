@@ -21,6 +21,9 @@ class CollectionFile extends File
     // JSON decoded Array of Collection requests
     public $requests = null;
 
+    // Array with JSON decoded Data
+    public $collectionData = null;
+
 /**
  * __construct to set up all properties and call parent
  *
@@ -32,12 +35,18 @@ class CollectionFile extends File
 
         $time = new Time($this->lastChange());
         $this->created = $time->nice();
+        $this->collectionName =
 
         $removeProjectName = explode('-', $fileName);
         $removeFileSuffix = explode('.', $removeProjectName[1]);
         $seperateVersionBuild = explode('_', $removeFileSuffix[0]);
         $this->versionNumber = $seperateVersionBuild[0];
         $this->buildNumber = $seperateVersionBuild[1];
+
+        $this->collectionData = json_decode($this->read(), true);
+
+        $this->collectionName = $this->collectionData['name'];
+        $this->collectionRequestDescription = $this->collectionData['description'];
     }
 
 /**
@@ -58,20 +67,15 @@ class CollectionFile extends File
  */
     public function getRequests()
     {
-        $collectionData = json_decode($this->read(), true);
-
-        $this->collectionName = $collectionData['name'];
-        $this->collectionDescription = $collectionData['description'];
-
         $requestFolders = [];
-        foreach ($collectionData['folders'] as $folder) {
+        foreach ($this->collectionData['folders'] as $folder) {
             $requestFolders[$folder['id']] = [
                 'name' => $folder['name'],
                 'requests' => []
             ];
         }
 
-        foreach ($collectionData['requests'] as $request) {
+        foreach ($this->collectionData['requests'] as $request) {
             if (empty($request['folder'])) {
                 $requestFolders[0]['requests'][] = $request;
                 continue;

@@ -54,12 +54,12 @@ class PostmanController extends AppController
         $this->set(compact('environments'));
     }
 
-/**
- * download collection file
- *
- * @param  string $fileName filename for clicked file
- * @return Response           response with downloadable file
- */
+    /**
+    * download collection file
+    *
+    * @param  string $fileName filename for clicked file
+    * @return Response           response with downloadable file
+    */
     public function downloadCollectionWithName($fileName = null)
     {
         $file = $this->collectionFolder->getCollectionWithName($fileName);
@@ -68,19 +68,19 @@ class PostmanController extends AppController
         return $this->response;
     }
 
-/**
- * download environment file
- *
- * @param  string $fileName filename for clicked file
- * @return Response           response with downloadable file
- */
-    public function downloadEnvironmentWithName($fileName = null)
-    {
-        $file = $this->environmentFolder->getEnvironmentWithName($fileName);
-        $this->response->file($file->path);
+    /**
+     * download environment file
+     *
+     * @param  string $fileName filename for clicked file
+     * @return Response           response with downloadable file
+     */
+        public function downloadEnvironmentWithName($fileName = null)
+        {
+            $file = $this->environmentFolder->getEnvironmentWithName($fileName);
+            $this->response->file($file->path);
 
-        return $this->response;
-    }
+            return $this->response;
+        }
 
 /**
  * view detail of collection view file

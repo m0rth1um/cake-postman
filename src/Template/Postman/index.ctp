@@ -1,9 +1,10 @@
+
 <div>
     <h1><?= $projectName . ' - Collections' ?> </h1>
 
     <?php if (! empty($invalidCollections)): ?>
         <div class="alert alert-danger"><?= ($error) ?></div>
-    <?php endif ?>
+    <?php endif; ?>
     <?php if (empty($environments)): ?>
         <b><?= 'Keine Environments vorhanden' ?></b>
         <hr>
@@ -44,7 +45,7 @@
             </tbody>
         </table>
         <hr>
-    <?php endif ?>
+    <?php endif; ?>
 
     <?php if (empty($collections)): ?>
         <b><?= 'Keine Collections vorhanden' ?></b>
@@ -61,16 +62,21 @@
                 </thead>
                     <tbody>
                         <?php foreach ($version['collections'] as $collection) : ?>
-                            <tr>
+                            <tr class="collection-row">
                                 <td>
                                     <?= $collection->buildNumber ?>
                                 </td>
 
-                                    <td>
+                                <td>
                                     <?= $collection->created ?>
                                 </td>
                                 <td>
                                     <div class="pull-right">
+                                        <?= $this->Html->link('Show', 'javascript:', [
+                                            'class' => 'btn btn-info show-collection-detail'
+                                        ]) ?>
+
+                                        &nbsp;
                                         <?= $this->Html->link('View', [
                                             'plugin' => 'CakePostman',
                                             'controller' => 'Postman',
@@ -93,6 +99,11 @@
                                     </div>
                                 </td>
 
+                            </tr>
+                            <tr class="collection-detail hidden">
+                                <td colspan=3>
+                                    <?= empty($collection->collectionDescription) ? 'Keine Description vorhanden' : $collection->collectionDescription ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

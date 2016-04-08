@@ -29,6 +29,7 @@
                         <th>Name</th>
                         <th>URL</th>
                         <th>Method</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,22 @@
                             </td>
                             <td>
                                 <?= empty($request['method']) ? 'method' : $this->Text->truncate($request['method']) ?>
+                            </td>
+
+                            <td>
+                            <?= $this->Html->link('Show', 'javascript:', [
+                                'class' => 'btn btn-info pull-right show-request-detail'
+                            ]) ?>
+                            </td>
+                        </tr>
+                        <tr class="request-detail hidden" style="width:100%; background:#ccc !important;">
+                            <td colspan=4>
+                                <b>Description</b>
+                                <br>
+                                <?= empty($request['description']) ? 'Keine Description vorhanden' : $request['description'] ?>
+                                <br><hr>
+                                <b>Body</b><br>
+                                <?= empty($request['rawModeData']) ? 'Keine Body vorhanden' : nl2br($request['rawModeData']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
