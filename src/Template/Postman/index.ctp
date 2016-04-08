@@ -1,5 +1,5 @@
 <div>
-    <h1><?= $projectName . ' - Collections' ?> </h1>
+    <h1><?= rawurldecode($projectName) . ' - Collections' ?> </h1>
 
     <?php if (! empty($invalidCollections)): ?>
         <div class="alert alert-danger"><?= ($error) ?></div>

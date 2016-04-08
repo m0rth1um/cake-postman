@@ -17,7 +17,7 @@ class CollectionsFolder extends Folder
     {
         parent::__construct(Configure::read('CakePostman.collections.path'));
 
-        $this->projectName = (Configure::read('CakePostman.collections.fileNameIdentifer'));
+        $this->projectName = rawurlencode(Configure::read('CakePostman.collections.fileNameIdentifer'));
     }
 
 /**
@@ -27,7 +27,7 @@ class CollectionsFolder extends Folder
  */
     public function getValidCollections()
     {
-        $regExString = '(' . $this->projectName . '-V\d+_B\d+\.postman_collection)';
+        $regExString = '(' . $this->projectName . '-V\d+_B\d+(\.json)?\.postman_collection)';
 
         $collections = $this->getCollectionsWithRegexString($regExString);
 
@@ -58,7 +58,7 @@ class CollectionsFolder extends Folder
  */
     public function getInvalidCollections()
     {
-        $regExString = '^((?!' . $this->projectName . '-V\d+_B\d+.postman_collection).)*$';
+        $regExString = '^((?!' . $this->projectName . '-V\d+_B\d+(\.json)?.postman_collection).)*$';
         return $this->getCollectionsWithRegexString($regExString);
     }
 
