@@ -8,7 +8,7 @@
 
     <?= $this->Html->link('Download', [
         'plugin' => 'CakePostman',
-        'controller' => 'Collections',
+        'controller' => 'Postman',
         'action' => 'downloadCollectionWithName',
         $file->name
     ], [

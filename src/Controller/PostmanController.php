@@ -23,8 +23,8 @@ class PostmanController extends AppController
     {
         parent::initialize();
 
-        $this->collectionFolder = new CollectionsFolder;
-        $this->environmentFolder = new EnvironmentFolder;
+        $this->CollectionFolder = new CollectionsFolder;
+        $this->EnvironmentFolder = new EnvironmentFolder;
     }
 
 /**
@@ -34,7 +34,7 @@ class PostmanController extends AppController
  */
     public function index()
     {
-        $invalidCollections = $this->collectionFolder->getInvalidCollections();
+        $invalidCollections = $this->CollectionFolder->getInvalidCollections();
         if (!empty($invalidCollections)) {
             $error = '<b>Collections entsprechen nicht dem Naming Standard:</b><br><br>';
             $error .= '<ul>';
@@ -42,15 +42,15 @@ class PostmanController extends AppController
                 $error .= '<li><b>' . $file->name . '</li></b><br>' . '<i>(' . $file->path . ')</i>';
             }
             $error .= '</ul>';
-            $error .= '<br><i>Beispiel: ' . $this->collectionFolder->projectName . '-V1_B23.postman_collection</i>';
+            $error .= '<br><i>Beispiel: ' . $this->CollectionFolder->projectName . '-V1_B23.postman_collection</i>';
             $this->set(compact('invalidCollections', 'error'));
         }
 
-        $projectName = $this->collectionFolder->projectName;
-        $collections = $this->collectionFolder->getValidCollections();
+        $projectName = $this->CollectionFolder->projectName;
+        $collections = $this->CollectionFolder->getValidCollections();
         $this->set(compact('projectName', 'collections'));
 
-        $environments = $this->environmentFolder->getEnvironments();
+        $environments = $this->EnvironmentFolder->getEnvironments();
         $this->set(compact('environments'));
     }
 
@@ -62,7 +62,7 @@ class PostmanController extends AppController
     */
     public function downloadCollectionWithName($fileName = null)
     {
-        $file = $this->collectionFolder->getCollectionWithName($fileName);
+        $file = $this->CollectionFolder->getCollectionWithName($fileName);
         $this->response->file($file->path);
 
         return $this->response;
@@ -76,7 +76,7 @@ class PostmanController extends AppController
      */
         public function downloadEnvironmentWithName($fileName = null)
         {
-            $file = $this->environmentFolder->getEnvironmentWithName($fileName);
+            $file = $this->EnvironmentFolder->getEnvironmentWithName($fileName);
             $this->response->file($file->path);
 
             return $this->response;
@@ -90,7 +90,7 @@ class PostmanController extends AppController
  */
     public function view($fileName = null)
     {
-        $file = $this->collectionFolder->getCollectionWithName($fileName);
+        $file = $this->CollectionFolder->getCollectionWithName($fileName);
         $collectionData = $file->getRequests();
 
         $this->set(compact('collectionData', 'file'));

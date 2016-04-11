@@ -31,6 +31,9 @@ class CollectionFile extends File
  */
     public function __construct($fileName)
     {
+        if (strpos($fileName, ' ') !== false) {
+            $fileName = rawurlencode($fileName);
+        }
         parent::__construct(Configure::read('CakePostman.collections.path') . $fileName);
 
         $time = new Time($this->lastChange());
