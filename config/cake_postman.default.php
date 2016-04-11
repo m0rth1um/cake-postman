@@ -9,6 +9,10 @@ return [
         'environments' => [
             'path' => ROOT . '/app_data/environments/',
             'acceptedFileTypes' => '/\.(postman_environment)$/i'
+        ],
+        'Administration' => [
+            'layout' => 'default',
+            'helpers' => []
         ]
     ]
 ];
