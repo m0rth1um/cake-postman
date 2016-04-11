@@ -1,8 +1,8 @@
 <?php
 namespace CakePostman\Controller;
 
+use App\Controller\AppController;
 use Cake\Event\Event;
-use CakePostman\Controller\AppController;
 use CakePostman\Lib\CollectionsFolder;
 use CakePostman\Lib\EnvironmentFolder;
 
